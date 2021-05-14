@@ -16,12 +16,15 @@ struct ContentView: View {
         case Favorites = "Favorites"
     }
     
+    let channels = [ "ESPN", "HBO", "CNN", "NBC" ]
+    
     @State private var selectedNameIndex = 0
     @State private var switchOn = false
     @State private var sliderValue = 0.0
     @State private var stepperValue = 0
     @State private var hiddenIndex = 1
     @State var disableIndex = 1
+    @State var imageT = "tv"
     
     var hidden : Bool
     {
@@ -36,6 +39,13 @@ struct ContentView: View {
         let switch2 =  Toggle("Switch", isOn: $switchOn).labelsHidden().disabled(disableIndex == 0)
         let slider = Slider(value: $sliderValue, in: 0...100).disabled(disableIndex == 0)
         let stepper = Stepper(value: $stepperValue, in: 0...100, label: {Text("Channel:  \(stepperValue)").padding()})
+        let picker = Picker("Favorites", selection: $selectedNameIndex)
+            {
+                ForEach(0 ..< channels.count)
+                {
+                    i in Text(channels[i]).tag(i)
+                }
+            }.pickerStyle(SegmentedPickerStyle())
             
             ZStack
         {
@@ -45,7 +55,7 @@ struct ContentView: View {
                 {
                     Text("Remote Control").bold().padding()
                     
-                    Spacer()
+                    
                     HStack
                     {
                         Text("Power: \(switchOn ? "On" : "Off")").frame(width: 100, height: 40, alignment: .leading).padding()
@@ -62,14 +72,24 @@ struct ContentView: View {
                         Spacer()
                     }
                     
+                    
                     HStack
                     {
                         stepper
-                        Spacer(minLength: 165)
+                        Spacer(minLength: 155)
                         
                     }
                     
-                    Text("Channels").bold().padding()
+                    HStack
+                    {
+                        Spacer()
+                        picker
+                        Spacer()
+                    }
+                    
+                    Text("Favorites").bold().padding()
+                    Image(channels[selectedNameIndex]) .resizable().aspectRatio(contentMode: .fit)
+                        //.frame(width: 150.0, height: 100.0)
                     
                     HStack
                     {
@@ -78,12 +98,27 @@ struct ContentView: View {
                     
                     Spacer()
                     Spacer()
-                    Spacer()
+                    
                     
                   
                     
                     
-                }
+                }.toolbar(content: {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {
+                            currentPage = .Remote
+                        }) {
+                            Text("Remote").padding()
+                        }
+                        Spacer()
+                        Button(action: {
+                            currentPage = .DVR
+                        }) {
+                            Text("DVR").padding()
+                        }
+                        Spacer()
+                    }
+                })
                 
                 
             }
