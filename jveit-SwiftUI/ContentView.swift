@@ -25,10 +25,16 @@ struct ContentView: View {
     @State private var hiddenIndex = 1
     @State var imageT = "tv"
     @State var isActive = true
+    @State var dvrI = "dvr"
+    @State private var isAlertPresent = false
+    @State private var username = ""
+    @State private var password = ""
+    @State var user = ""
+    @State var loggedIn = false
     
     
     
-    @State private var currentPage = Page.Remote
+    @State private var currentPage = Page.DVR
     
     var body: some View
     {
@@ -102,6 +108,7 @@ struct ContentView: View {
                     
                 }.toolbar(content: {
                     ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
                         Button(action: {
                             currentPage = .Remote
                         }) {
@@ -114,13 +121,153 @@ struct ContentView: View {
                             Text("DVR").padding()
                         }
                         Spacer()
+                        Button(action: {
+                            currentPage = .Favorites
+                        }) {
+                            Text("Favorites").padding()
+                        }
+                        Spacer()
+                        
                     }
                 })
                 
                 
             }
+            
+            if currentPage == .DVR
+            {
+                VStack
+                {
+                    Text("DVR").bold().padding()
+                    
+                    HStack
+                    {
+                        Text("Enter Login Information to Access DVR").bold().padding()
+                    }
+                    
+                    HStack
+                    {
+                        TextField("Username: ", text: $username, onCommit:  {
+                            UIApplication.shared.endEditing()
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }.padding([.top, .leading, .trailing])
+                    
+                    HStack
+                    {
+                        SecureField("Password: ", text: $password, onCommit:  {
+                            UIApplication.shared.endEditing()
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }.padding([.top, .leading, .trailing])
+                    
+                    Spacer()
+                    
+                    HStack
+                    {
+                        Button(action: {
+                            user = username
+                            username = ""
+                            password = ""
+                            isAlertPresent = true
+                            loggedIn = true
+                        }) {
+                            Text("Login").padding()
+                        }.alert(isPresented: $isAlertPresent) {
+                            Alert(title: Text("Welcome to your DVR!"),
+                                  message: Text("""
+                                    User:     \(user)
+                                    """),
+                                  dismissButton: nil)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    HStack
+                    {
+                        Image(dvrI).resizable().frame(width: 250.0, height: 150.0)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack(spacing: -6)
+                    {
+                        Text("Recordings").bold().padding()
+                        Text("Breaking Bad Season 4 Episode 5").bold().padding().opacity(!loggedIn ? 0 : 1)
+                        Text("Westworld Season 3 Episode 8").bold().padding().opacity(!loggedIn ? 0 : 1)
+
+                        Text("Game of Thrones Season 1 Episode 6").bold().padding().opacity(!loggedIn ? 0 : 1)
+
+                        Text("Steve Jobs").bold().padding().opacity(!loggedIn ? 0 : 1)
+
+                    }
+                    
+                    
+                    
+                }.toolbar(content: {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        Button(action: {
+                            currentPage = .Remote
+                        }) {
+                            Text("Remote").padding()
+                        }
+                        Spacer()
+                        Button(action: {
+                            currentPage = .DVR
+                        }) {
+                            Text("DVR").padding()
+                        }
+                        Spacer()
+                        Button(action: {
+                            currentPage = .Favorites
+                        }) {
+                            Text("Favorites").padding()
+                        }
+                        Spacer()                    }
+                })
+                
+            }
+            
+            if currentPage == .Favorites
+            {
+                VStack
+                {
+                    Text("Favorites").bold().padding()
+                    
+                }.toolbar(content: {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        Button(action: {
+                            currentPage = .Remote
+                        }) {
+                            Text("Remote").padding()
+                        }
+                        Spacer()
+                        Button(action: {
+                            currentPage = .DVR
+                        }) {
+                            Text("DVR").padding()
+                        }
+                        Spacer()
+                        Button(action: {
+                            currentPage = .Favorites
+                        }) {
+                            Text("Favorites").padding()
+                        }
+                        Spacer()
+                        
+                    }
+                })            }
         }
         
+    }
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
