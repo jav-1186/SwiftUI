@@ -234,7 +234,17 @@ struct ContentView: View {
             {
                 VStack
                 {
-                    Text("Favorites").bold().padding()
+                    NavigationView {
+                        List(shows) { show in
+                            NavigationLink(destination: ShowDetail(show: show)) {
+                                ShowRow(show: show)
+                            }
+                        }.navigationTitle("Favorites")
+                    }
+                    
+                    //Text("Favorites").bold().padding()
+                    
+                    
                     
                 }.toolbar(content: {
                     ToolbarItemGroup(placement: .bottomBar) {
@@ -276,3 +286,36 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct ShowRow: View {
+    var show: Show
+    
+    var body: some View {
+        HStack {
+            Image(show.type.rawValue)
+            VStack(alignment: .leading) {
+                Text(show.name).font(.title2)
+                Text(show.shortDescription).font(.subheadline).foregroundColor(.secondary)
+            }
+            //.padding()
+            Spacer()
+        }
+    }
+}
+
+struct ShowDetail: View {
+    var show: Show
+    
+    var body: some View {
+        
+        VStack(alignment: .center) {
+            Text(show.name).font(.title).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Spacer().frame(height: 30)
+            Text(show.longDescription)
+            
+            Spacer()
+        }.padding()
+        .navigationBarTitle("TV Show Details")
+    }
+}
+

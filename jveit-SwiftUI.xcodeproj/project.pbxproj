@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E8AA36D265218A30065AACC /* shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8AA36C265218A30065AACC /* shows.swift */; };
 		8E928D6C264CD40400B77C9B /* jveit_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E928D6B264CD40400B77C9B /* jveit_SwiftUIApp.swift */; };
 		8E928D70264CD40700B77C9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E928D6F264CD40700B77C9B /* Assets.xcassets */; };
 		8E928D73264CD40700B77C9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E928D72264CD40700B77C9B /* Preview Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E8AA36C265218A30065AACC /* shows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shows.swift; sourceTree = "<group>"; };
 		8E928D68264CD40400B77C9B /* jveit-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jveit-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E928D6B264CD40400B77C9B /* jveit_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jveit_SwiftUIApp.swift; sourceTree = "<group>"; };
 		8E928D6D264CD40400B77C9B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				8E928D6B264CD40400B77C9B /* jveit_SwiftUIApp.swift */,
 				8E928D6D264CD40400B77C9B /* ContentView.swift */,
+				8E8AA36C265218A30065AACC /* shows.swift */,
 				8E928D6F264CD40700B77C9B /* Assets.xcassets */,
 				8E928D74264CD40700B77C9B /* Info.plist */,
 				8E928D71264CD40700B77C9B /* Preview Content */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E928D7D264CD7A900B77C9B /* ContentView.swift in Sources */,
+				8E8AA36D265218A30065AACC /* shows.swift in Sources */,
 				8E928D6C264CD40400B77C9B /* jveit_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
